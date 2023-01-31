@@ -65,7 +65,7 @@ export async function appRoutes(app: FastifyInstance) {
 
         const completedHabits = day?.dayHabits.map(dayHabit => {
             return dayHabit.habit_id
-        })
+        }) ?? []
 
         return {
             possibleHabits,
@@ -123,7 +123,7 @@ export async function appRoutes(app: FastifyInstance) {
 
     app.get('/summary', async () => {
         const summary = await prisma.$queryRaw`
-      SELECT 
+        SELECT 
         D.id, 
         D.date,
         (
